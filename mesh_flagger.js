@@ -19,7 +19,13 @@
     version: "1.0.1",
     min_version: "4.2.0",
     variant: "both",
-    oninstall: () => showAbout(true),
+    oninstall() {
+      showAbout(true)
+      Blockbench.showQuickMessage("Successfully installed Mesh Flagger!", 3000)
+    },
+    onuninstall() {
+      Blockbench.showQuickMessage("Uninstalled Mesh Flagger", 3000)
+    },
     onload() {
       addAbout()
       const highlighter = {
@@ -55,7 +61,7 @@
       actions = [
         new Action("flag_all_meshes", {
           name: "Flag All Meshes",
-          description: "Highlight cubes less than 1 unit",
+          description: "Highlight all meshes in a project",
           icon: "fa-gem",
           click: function() {
             const cubes = Mesh.all
@@ -65,7 +71,7 @@
         }),
         new Action("flag_six_faced_meshes", {
           name: "Flag 6-Faced Meshes",
-          description: "Highlight cubes with decimal sizes",
+          description: "Highlight all meshes with 6 faces",
           icon: "crop_7_5",
           click: function() {
             const cubes2 = Mesh.all.filter(e => Object.entries(e.faces).length === 6)
@@ -140,12 +146,11 @@
         <div id="content">
           <h1 style="margin-top:-10px">${name}</h1>
           <p>Flags meshes in a project on demand.</p>
-          <p>## Worth noting:</p>
+          <h4>Worth noting:</h4>
           <p>- Plugin has the following capabilities: Flags all meshes in a project, and flags all meshes with six faces in a project.</p>
           <p>- The desired effect of the six-faced functionality is to flag meshes that may look like cuboids but really are, internally, meshes. However, that's not always going to be the case.</p>
           <p>- If you are wondering why a particular 6-faced mesh isn't being flagged, make sure the mesh doesn't have any loop cuts.
-          <p>Go to Tools > Flag Meshes and choose the option you want to use this plugin. You can read more about this plugin on the Blockbench website, or in the plugin list in File > Plugins.</p>
-          <p>## How to use:
+          <h4>How to use:</h4>
           <p>Go to <b>Tools > Flag Meshes</b> and simply select one of the options - <b>Flag All Meshes</b> for all meshes and <b>Flag 6-Faced Meshes</b> for meshes with 6 faces.
           <div class="socials">
             <a href="${links["TwitterSirJain"]}" class="open-in-browser">
