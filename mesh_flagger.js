@@ -15,8 +15,8 @@
     author,
     description: "Flags meshes in a project on demand.",
     about: "The **Generic model format** is the only format that supports meshes. If you convert to another format with meshes in your project, the meshes will disappear. You can choose to flag all meshes in the project through one click with this plugin. This lets you know what you are losing by converting your project, in case you looked over any.\n\n## How to use\nTo use this plugin, go to `File > Plugins > Available` and search for `Mesh Flagger`. Click install, then use `Tools > Flag Meshes` and click one of the options. Clicking the first option causes the plugin to flag all meshes in a project. The second option allows Blockbench to flag all meshes with six faces. This includes cuboid-meshes, but keep in mind it can flag non-cuboid meshes with six faces too!\n\n\nIt would be appreciated to report any bugs and suggestions!",
-    tags: ["Generic Model", "Per-FaceUV", "Meshes"],
-    version: "1.0.1",
+    tags: ["Format: Generic Model", "Per-Face UV", "Meshes"],
+    version: "1.0.2",
     min_version: "4.2.0",
     variant: "both",
     oninstall() {
@@ -84,7 +84,8 @@
         id: "flag_meshes",
         name: "Flag Meshes",
         children: actions,
-        icon: "report_gmailerrorred"
+        icon: "report_gmailerrorred",
+        condition: {features: ['meshes']}
       }, "tools")
     },
     onunload() {
